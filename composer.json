@@ -1,0 +1,33 @@
+{
+    "name": "messagemedia/conversations",
+    "type": "library",
+    "description": "The Conversations API allows users to communicate by sending and receiving messages via OTT messaging services.",
+    "version": "1.0.0",
+    "keywords": ["Conversations","API","SDK"],
+    "homepage": "https://apimatic.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "APIMatic SDK Generator",
+            "email": "support@apimatic.io",
+            "homepage": "https://apimatic.io",
+            "role": "API Tool"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "mashape/unirest-php": "~3.0.1",
+        "apimatic/jsonmapper": "~1.3.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "MessageMediaConversationsLib\\": "src/"
+        }
+    }
+}
