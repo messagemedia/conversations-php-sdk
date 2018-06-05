@@ -23,112 +23,97 @@ $basicAuthPassword = 'basicAuthPassword'; // The password to use with basic auth
 $client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
 
 $provisioning = $client->getProvisioning();
+$request = new ProvisionAccountRequest("https://callback.url.com", "Rainbow Serpent Festival");
+
+$provisioning->createProvisionAccountUsingPOST($request);
 
 ```
 
 ### 🔐 Facebook Authorization
 ```php
-const lib = require('messagemedia-conversations-sdk');
+require_once('vendor/autoload.php');
 
-// Configuration parameters and credentials
-lib.Configuration.basicAuthUserName = "API_KEY"; // The username to use with basic authentication
-lib.Configuration.basicAuthPassword = "API_SECRET"; // The password to use with basic authentication
+$basicAuthUserName = 'basicAuthUserName'; // The username to use with basic authentication
+$basicAuthPassword = 'basicAuthPassword'; // The password to use with basic authentication
 
-var controller = lib.FacebookController;
+$client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
 
-controller.getFacebookAuthorisationUrlUsingGET(function(error, response, context) {
-    console.log(response);
-});
+$facebook = $client->getFacebook();
+$result = $facebook->getFacebookAuthorisationUrlUsingGET();
 
 ```
 
 ### ⬇️ Get Facebook pages
 ```php
-const lib = require('messagemedia-conversations-sdk');
+require_once('vendor/autoload.php');
 
-// Configuration parameters and credentials
-lib.Configuration.basicAuthUserName = "API_KEY"; // The username to use with basic authentication
-lib.Configuration.basicAuthPassword = "API_SECRET"; // The password to use with basic authentication
+$basicAuthUserName = 'basicAuthUserName'; // The username to use with basic authentication
+$basicAuthPassword = 'basicAuthPassword'; // The password to use with basic authentication
 
-var controller = lib.FacebookController;
-
-controller.getFacebookPagesUsingGET(function(error, response, context) {
-    console.log(response);
-});
+$client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
+$result = $facebook->getFacebookPagesUsingGET();
 
 ```
 
 ### ♻️ Integrate Facebook page
 You can get the facebookPageId by looking at the response of the Get Facebook pages example.
 ```php
-const lib = require('messagemedia-conversations-sdk');
+require_once('vendor/autoload.php');
 
-// Configuration parameters and credentials
-lib.Configuration.basicAuthUserName = "API_KEY"; // The username to use with basic authentication
-lib.Configuration.basicAuthPassword = "API_SECRET"; // The password to use with basic authentication
+$basicAuthUserName = 'basicAuthUserName'; // The username to use with basic authentication
+$basicAuthPassword = 'basicAuthPassword'; // The password to use with basic authentication
 
-var controller = lib.FacebookController;
+$client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
+$facebookPageId = 'facebookPageId';
 
-var facebookPageId = 'facebookPageId';
-
-controller.createIntegrateFacebookPageUsingPOST(facebookPageId, function(error, response, context) {
-    console.log(response);
-});
+$facebook->createIntegrateFacebookPageUsingPOST($facebookPageId);
 
 ```
 
 ### 👤 Get users
 ```php
-const lib = require('messagemedia-conversations-sdk');
+require_once('vendor/autoload.php');
 
-// Configuration parameters and credentials
-lib.Configuration.basicAuthUserName = "API_KEY"; // The username to use with basic authentication
-lib.Configuration.basicAuthPassword = "API_SECRET"; // The password to use with basic authentication
+$basicAuthUserName = 'basicAuthUserName'; // The username to use with basic authentication
+$basicAuthPassword = 'basicAuthPassword'; // The password to use with basic authentication
 
-var controller = lib.AppUsersController;
+$client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
+$appUsers = $client->getAppUsers();
 
-controller.getAppUsersUsingGET(function(error, response, context) {
-  console.log(response);
-});
+$result = $appUsers->getAppUsersUsingGET();
 
 ```
 
 ### 💬 Get user messages
 You can get the appUserId from the response of the Get users example.
 ```php
-const lib = require('messagemedia-conversations-sdk');
+require_once('vendor/autoload.php');
 
-// Configuration parameters and credentials
-lib.Configuration.basicAuthUserName = "API_KEY"; // The username to use with basic authentication
-lib.Configuration.basicAuthPassword = "API_SECRET"; // The password to use with basic authentication
+$basicAuthUserName = 'basicAuthUserName'; // The username to use with basic authentication
+$basicAuthPassword = 'basicAuthPassword'; // The password to use with basic authentication
 
-var controller = lib.AppUsersController;
+$client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
+$appUsers = $client->getAppUsers();
+$appUserId = 'appUserId';
 
-var appUserId = 'appUserId';
-
-controller.getAppUserMessagesUsingGET(appUserId, function(error, response, context) {
-  console.log(response);
-});
+$result = $appUsers->getAppUserMessagesUsingGET($appUserId);
 
 ```
 
 ### ✉️ Send message to user
 You can get the appUserId from the response of the Get users example.
 ```php
-const lib = require('messagemedia-conversations-sdk');
+require_once('vendor/autoload.php');
 
-// Configuration parameters and credentials
-lib.Configuration.basicAuthUserName = "API_KEY"; // The username to use with basic authentication
-lib.Configuration.basicAuthPassword = "API_SECRET"; // The password to use with basic authentication
+$basicAuthUserName = 'basicAuthUserName'; // The username to use with basic authentication
+$basicAuthPassword = 'basicAuthPassword'; // The password to use with basic authentication
 
-var controller = lib.AppUsersController;
+$client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
+$appUsers = $client->getAppUsers();
+$appUserId = 'appUserId';
+$message = new BaseMessageDto({"key":"value"});
 
-var appUserId = 'appUserId';
-var message = new BaseMessageDto({"key":"value"});
-
-controller.createSendMessageUsingPOST(appUserId, message, function(error, response, context) {
-  console.log(response);
-});
+$appUsers->createSendMessageUsingPOST($appUserId, $message);
 
 ```
 
