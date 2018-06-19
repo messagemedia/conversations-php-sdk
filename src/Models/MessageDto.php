@@ -8,7 +8,6 @@
 namespace MessageMediaConversationsLib\Models;
 
 use JsonSerializable;
-use MessageMediaConversationsLib\Utils\DateTimeHelper;
 
 /**
  * @todo Write general description for this model
@@ -35,17 +34,16 @@ class MessageDto implements JsonSerializable
 
     /**
      * @todo Write general description for this property
-     * @factory \MessageMediaConversationsLib\Utils\DateTimeHelper::fromRfc3339DateTime
-     * @var \DateTime|null $timestamp public property
+     * @var string|null $timestamp public property
      */
     public $timestamp;
 
     /**
      * Constructor to set initial or default values of member properties
-     * @param string    $channel   Initialization value for $this->channel
-     * @param string    $id        Initialization value for $this->id
-     * @param string    $text      Initialization value for $this->text
-     * @param \DateTime $timestamp Initialization value for $this->timestamp
+     * @param string $channel   Initialization value for $this->channel
+     * @param string $id        Initialization value for $this->id
+     * @param string $text      Initialization value for $this->text
+     * @param string $timestamp Initialization value for $this->timestamp
      */
     public function __construct()
     {
@@ -67,8 +65,7 @@ class MessageDto implements JsonSerializable
         $json['channel']   = $this->channel;
         $json['id']        = $this->id;
         $json['text']      = $this->text;
-        $json['timestamp'] = isset($this->timestamp) ?
-            DateTimeHelper::toRfc3339DateTime($this->timestamp) : null;
+        $json['timestamp'] = $this->timestamp;
 
         return $json;
     }

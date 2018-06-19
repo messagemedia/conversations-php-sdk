@@ -25,20 +25,20 @@ class MessageMediaConversationsClient
         Configuration::$basicAuthPassword = $basicAuthPassword ? $basicAuthPassword : Configuration::$basicAuthPassword;
     }
     /**
-     * Singleton access to Provisioning controller
-     * @return Controllers\ProvisioningController The *Singleton* instance
-     */
-    public function getProvisioning()
-    {
-        return Controllers\ProvisioningController::getInstance();
-    }
-    /**
      * Singleton access to AppUsers controller
      * @return Controllers\AppUsersController The *Singleton* instance
      */
     public function getAppUsers()
     {
         return Controllers\AppUsersController::getInstance();
+    }
+    /**
+     * Singleton access to Configuration controller
+     * @return Controllers\ConfigurationController The *Singleton* instance
+     */
+    public function getConfiguration()
+    {
+        return Controllers\ConfigurationController::getInstance();
     }
     /**
      * Singleton access to Facebook controller
