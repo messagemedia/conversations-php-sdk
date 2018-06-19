@@ -37,7 +37,7 @@ class AppUsersController extends BaseController
         if (null === static::$instance) {
             static::$instance = new static();
         }
-        
+
         return static::$instance;
     }
 
@@ -66,7 +66,7 @@ class AppUsersController extends BaseController
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
-        
+
         //prepare query string for API call
         $_queryBuilder = $_queryBuilder.'/beta/conversations/users/{appUserId}/messages';
 
@@ -80,7 +80,7 @@ class AppUsersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagesmedia-conversations',
+            'user-agent'    => 'messagemedia-conversations',
             'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8'
         );
@@ -161,7 +161,7 @@ class AppUsersController extends BaseController
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
-        
+
         //prepare query string for API call
         $_queryBuilder = $_queryBuilder.'/beta/conversations/users/{appUserId}/messages';
 
@@ -233,7 +233,7 @@ class AppUsersController extends BaseController
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
-        
+
         //prepare query string for API call
         $_queryBuilder = $_queryBuilder.'/beta/conversations/users/{appUserId}';
 
@@ -247,7 +247,7 @@ class AppUsersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagesmedia-conversations',
+            'user-agent'    => 'messagemedia-conversations',
             'Accept'        => 'application/json'
         );
 
@@ -312,7 +312,7 @@ class AppUsersController extends BaseController
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
-        
+
         //prepare query string for API call
         $_queryBuilder = $_queryBuilder.'/beta/conversations/users';
 
@@ -321,7 +321,7 @@ class AppUsersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagesmedia-conversations',
+            'user-agent'    => 'messagemedia-conversations',
             'Accept'        => 'application/json'
         );
 

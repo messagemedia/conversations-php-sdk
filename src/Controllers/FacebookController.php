@@ -37,7 +37,7 @@ class FacebookController extends BaseController
         if (null === static::$instance) {
             static::$instance = new static();
         }
-        
+
         return static::$instance;
     }
 
@@ -54,7 +54,7 @@ class FacebookController extends BaseController
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
-        
+
         //prepare query string for API call
         $_queryBuilder = $_queryBuilder.
             '/beta/conversations/facebook/pages/{facebookPageId}/integrate';
@@ -69,7 +69,7 @@ class FacebookController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagesmedia-conversations'
+            'user-agent'    => 'messagemedia-conversations'
         );
 
         //set HTTP basic auth parameters
@@ -133,7 +133,7 @@ class FacebookController extends BaseController
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
-        
+
         //prepare query string for API call
         $_queryBuilder = $_queryBuilder.'/beta/conversations/facebook/pages';
 
@@ -142,7 +142,7 @@ class FacebookController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagesmedia-conversations',
+            'user-agent'    => 'messagemedia-conversations',
             'Accept'        => 'application/json'
         );
 
@@ -207,7 +207,7 @@ class FacebookController extends BaseController
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
-        
+
         //prepare query string for API call
         $_queryBuilder = $_queryBuilder.'/beta/conversations/facebook/authorise';
 
@@ -216,7 +216,7 @@ class FacebookController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagesmedia-conversations',
+            'user-agent'    => 'messagemedia-conversations',
             'Accept'        => 'application/json'
         );
 
