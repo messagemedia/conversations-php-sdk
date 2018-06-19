@@ -42,13 +42,13 @@ class FacebookController extends BaseController
     }
 
     /**
-     * Integrates the Facebook page with the given ID with the provisioned account.
+     * Integrates the Facebook page with the given ID with the configured account.
      *
      * @param string $facebookPageId facebookPageId
-     * @return void response from the API call
+     * @return string response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function createIntegrateFacebookPageUsingPOST(
+    public function createIntegrateFacebookPage(
         $facebookPageId
     ) {
 
@@ -57,7 +57,7 @@ class FacebookController extends BaseController
         
         //prepare query string for API call
         $_queryBuilder = $_queryBuilder.
-            '/v1/conversations/facebook/pages/{facebookPageId}/integrate';
+            '/beta/conversations/facebook/pages/{facebookPageId}/integrate';
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
@@ -93,36 +93,49 @@ class FacebookController extends BaseController
         }
 
         //Error handling using HTTP status codes
-        if ($response->code == 401) {
-            throw new APIException('Unauthorized', $_httpContext);
-        }
-
-        if ($response->code == 403) {
-            throw new APIException('Forbidden', $_httpContext);
-        }
-
-        if ($response->code == 404) {
-            throw new APIException('Not Found', $_httpContext);
+        if ($response->code == 400) {
+            throw new APIException(
+                'The account is not provisioned or the Facebook user isn\'t authenticated or the facebookPageId is ' .
+                'invalid.',
+                $_httpContext
+            );
         }
 
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
+
+        return $response->body;
     }
 
     /**
-     * Gets a list of Facebook pages belonging to the provisioned and Facebook authorised account.
+     * Gets a list of Facebook pages belonging to the provisioned and Facebook authorised account. A
+     * successful response from this endpoint will have the following structure:
+     * ```
+     * {
+     * "data": [
+     * {
+     * "id": "1573307926039629",
+     * "name": "Rainbow Serpent Festival"
+     * },
+     * {
+     * "id": "373479609790958",
+     * "name": "Fans of Doing Live Demos"
+     * }
+     * ]
+     * }
+     * ```
      *
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getFacebookPagesUsingGET()
+    public function getFacebookPages()
     {
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
         
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/v1/conversations/facebook/pages';
+        $_queryBuilder = $_queryBuilder.'/beta/conversations/facebook/pages';
 
         //validate and preprocess url
         $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
@@ -154,16 +167,11 @@ class FacebookController extends BaseController
         }
 
         //Error handling using HTTP status codes
-        if ($response->code == 401) {
-            throw new APIException('Unauthorized', $_httpContext);
-        }
-
-        if ($response->code == 403) {
-            throw new APIException('Forbidden', $_httpContext);
-        }
-
-        if ($response->code == 404) {
-            throw new APIException('Not Found', $_httpContext);
+        if ($response->code == 400) {
+            throw new APIException(
+                'The account is not provisioned or the Facebook user isn\'t authenticated.',
+                $_httpContext
+            );
         }
 
         //handle errors defined at the API level
@@ -171,23 +179,37 @@ class FacebookController extends BaseController
 
         $mapper = $this->getJsonMapper();
 
-        return $mapper->mapClass($response->body, 'MessageMediaConversationsLib\\Models\\FacebookPagesDto');
+        return $mapper->mapClass($response->body, 'MessageMediaConversationsLib\\Models\\GetFacebookPagesResponse');
     }
 
     /**
-     * Once an account has been provisioned, endpoint can be called to get the Facebook authorisation URL.
+     * Before you can start integrating Facebook pages on your Facebook account, MessageMedia's messaging
+     * platform needs access to that page via what Facebook call a page access token. To get the page
+     * access token you first need to provide MessageMedia limited access to your Facebook account.
+     * Calling this endpoint will get the Facebook authorisation URL which you are required to go through
+     * before you can call the integration endpoints. A successful response from this endpoint will have
+     * the following structure:
+     * ```
+     * {
+     * "authorisation_url": "https://www.facebook.com/v2.12/dialog/oauth?client_id={facebookAppId}&amp;
+     * redirect_uri={apiUrl}/beta/integration/authenticated&amp;state={provisionedAccountUUID}&amp;
+     * response_type=token&amp;scope=email,manage_pages,pages_messaging"
+     * }
+     * ```
+     * *Note: Granting MessageMedia access will only see allow us to see your basic details and the list of
+     * pages you have*
      *
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function getFacebookAuthorisationUrlUsingGET()
+    public function getFacebookAuthorisationURL()
     {
 
         //the base uri for api requests
         $_queryBuilder = Configuration::$BASEURI;
         
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/v1/conversations/facebook/authorise';
+        $_queryBuilder = $_queryBuilder.'/beta/conversations/facebook/authorise';
 
         //validate and preprocess url
         $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
@@ -219,16 +241,8 @@ class FacebookController extends BaseController
         }
 
         //Error handling using HTTP status codes
-        if ($response->code == 401) {
-            throw new APIException('Unauthorized', $_httpContext);
-        }
-
-        if ($response->code == 403) {
-            throw new APIException('Forbidden', $_httpContext);
-        }
-
-        if ($response->code == 404) {
-            throw new APIException('Not Found', $_httpContext);
+        if ($response->code == 400) {
+            throw new APIException('The account is not provisioned', $_httpContext);
         }
 
         //handle errors defined at the API level
@@ -236,6 +250,6 @@ class FacebookController extends BaseController
 
         $mapper = $this->getJsonMapper();
 
-        return $mapper->mapClass($response->body, 'MessageMediaConversationsLib\\Models\\FacebookAuthorisationResponse');
+        return $mapper->mapClass($response->body, 'MessageMediaConversationsLib\\Models\\GetFacebookAuthorisationURLResponse');
     }
 }
