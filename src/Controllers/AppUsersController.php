@@ -80,7 +80,7 @@ class AppUsersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagemedia-conversations',
+            'user-agent'    => 'messagemedia-conversations-sdk-1.0.0',
             'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8'
         );
@@ -175,7 +175,7 @@ class AppUsersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagesmedia-conversations',
+            'user-agent'    => 'messagemedia-conversations-sdk-1.0.0',
             'Accept'        => 'application/json'
         );
 
@@ -247,7 +247,7 @@ class AppUsersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagemedia-conversations',
+            'user-agent'    => 'messagemedia-conversations-sdk-1.0.0',
             'Accept'        => 'application/json'
         );
 
@@ -321,7 +321,7 @@ class AppUsersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagemedia-conversations',
+            'user-agent'    => 'messagemedia-conversations-sdk-1.0.0',
             'Accept'        => 'application/json'
         );
 

@@ -78,7 +78,7 @@ class ConfigurationController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'messagemedia-conversations',
+            'user-agent'    => 'messagemedia-conversations-sdk-1.0.0',
             'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8'
         );
