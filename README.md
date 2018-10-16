@@ -24,7 +24,7 @@ $client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basi
 
 $provisioning = $client->getConfiguration();
 $bodyValue = "{    \"name\": \"Rainbow Serpent Festival\",    \"callback_url\": \"https://callback.url.com\"}";
-$body = APIHelper::deserialize($bodyValue);
+$body = MessageMediaConversationsLib\APIHelper::deserialize($bodyValue);
 $configuration->createConfigureAccount($body);
 
 ```
@@ -51,6 +51,7 @@ $basicAuthUserName = 'basicAuthUserName'; // The username to use with basic auth
 $basicAuthPassword = 'basicAuthPassword'; // The password to use with basic authentication
 
 $client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
+$facebook = $client->getFacebook();
 $result = $facebook->getFacebookPages();
 
 ```
@@ -64,6 +65,8 @@ $basicAuthUserName = 'basicAuthUserName'; // The username to use with basic auth
 $basicAuthPassword = 'basicAuthPassword'; // The password to use with basic authentication
 
 $client = new MessageMediaConversationsLib\MessageMediaConversationsClient($basicAuthUserName, $basicAuthPassword);
+$facebook = $client->getFacebook();
+
 $facebookPageId = 'facebookPageId';
 
 $facebook->createIntegrateFacebookPage($facebookPageId);
