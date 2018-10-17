@@ -1,5 +1,4 @@
 # MessageMedia Conversations PHP SDK
-[![Travis Build Status](https://api.travis-ci.org/messagemedia/conversations-php-sdk.svg?branch=master)](https://travis-ci.org/messagemedia/conversations-php-sdk)
 [![PHP version](https://badge.fury.io/ph/messagemedia%2Fconversations-sdk.svg)](https://badge.fury.io/ph/messagemedia%2Fconversations-sdk)
 
 ⚠️ **Please note the API documented is in beta and is subject to breaking changes in the short term.** ⚠️
