@@ -1,5 +1,5 @@
 # MessageMedia Conversations PHP SDK
-[![PHP version](https://badge.fury.io/ph/messagemedia%2Fconversations-sdk.svg)](https://badge.fury.io/ph/messagemedia%2Fconversations-sdk)
+[![PHP version](https://badge.fury.io/ph/messagemedia%2Fconversations.svg)](https://badge.fury.io/ph/messagemedia%2Fconversations)
 
 ⚠️ **Please note the API documented is in beta and is subject to breaking changes in the short term.** ⚠️
 
